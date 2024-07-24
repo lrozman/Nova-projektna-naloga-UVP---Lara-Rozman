@@ -23,7 +23,8 @@ def shrani(podatki):
                 "vhodne naprave",
                 "večigralski načini",
                 "št. offline igralcev",
-                "št. online igralcev"
+                "št. online igralcev",
+                "cena v dolarjih"
             ]
         )
         for podatek in podatki:
@@ -47,7 +48,8 @@ def shrani(podatki):
                     podatek["vhodne naprave"],
                     podatek["večigralski načini"],
                     podatek["št. offline igralcev"],
-                    podatek["št. online igralcev"]
+                    podatek["št. online igralcev"],
+                    podatek["cena"]
                 ]
             )
     

@@ -62,6 +62,7 @@ def izlusci_igro(id):
         critics = int(najdba.group(1))
     else:
         print("Napaka: kritiki", id)
+        critics = "n/a"
 
 
     # Izluscimo podatke o žanrih ipd.
@@ -125,6 +126,7 @@ def izlusci_igro(id):
         oznaka = najdba.group(1)
     else:
         print("Napaka: oznaka", id)
+        oznaka = "NG"
 
     
     
@@ -174,6 +176,24 @@ def izlusci_igro(id):
     else:
         st_online = "NG"
         print("Napaka: st_online", id)
+    
+
+    # Izluscimo podatek o ceni.
+    cene_used = []
+    cene_new = []
+    cena = "/"
+    cena_re = re.compile(r'$(?P<cena>\d+\.\d+) (?P<stanje>)\w+\b')
+    if cena_re.search(vsebina) is not None:
+        for najdba in cena_re.finditer(vsebina):
+            if najdba["stanje"] == "new":
+                cene_new.append(float(najdba["cena"]))
+            if najdba["stanje"] == "used":
+                cene_used.append(float(najdba["cena"]))
+        if cene_new:
+            cena = "$" + str(min(cene_new)) + "new"
+        elif cene_used:
+            cena = "$" + str(min(cene_used)) + "used"
+
 
 
 
@@ -193,7 +213,8 @@ def izlusci_igro(id):
         "vhodne naprave": input,
         "večigralski načini": multiplayer,
         "št. offline igralcev": st_offline,
-        "št. online igralcev": st_online
+        "št. online igralcev": st_online,
+        "cena": cena
     }
 
 
