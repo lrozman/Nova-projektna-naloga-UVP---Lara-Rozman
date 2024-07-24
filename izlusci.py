@@ -188,5 +188,5 @@ def izlusci_igro(id):
     }
 
 
-def izlusci_razvijalca(id_dev):
-    return
+# Ali naj izluščim tudi kakšne podatke o razvijalcih posebej? Kaj bi to lahko sploh bili?
+# Problema: Kateri podatki so na voljo? Nekateri studii imajo 12 vnosov, nekateri 40 tisoč.
