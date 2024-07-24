@@ -28,7 +28,7 @@ def izlusci_igro(id):
         if najdba is not None:
             datum = najdba.group(1)
         else:
-            print("Napaka: datum", id)
+            #print("Napaka: datum", id)
             datum = "NG"
 
 
@@ -40,8 +40,8 @@ def izlusci_igro(id):
         devs_re2 = re.compile(r'<a href="https://www.mobygames.com/company/(?P<id>\d+)/.*?}\'>(?P<dev>.+?)</a>')
         for najdba in devs_re2.finditer(najdba1.group(1)):
             razvijalci.append((najdba["dev"], najdba["id"]))
-    else:
-        print("Napaka: razvijalci", id)
+    #else:
+        #print("Napaka: razvijalci", id)
     
     publishers = []
     pubs_re1 = re.compile(r'<dt>Publishers</dt>(.*?)</dd>', flags=re.DOTALL)
@@ -59,7 +59,7 @@ def izlusci_igro(id):
     if najdba is not None:
         moby_score = float(najdba.group(1))
     else:
-        print("Napaka: moby score", id)
+        #print("Napaka: moby score", id)
         moby_score = "n/a"
 
     critics_re = re.compile(r'<dt>Critics</dt>.*?(\d\d)%', flags=re.DOTALL)
@@ -67,7 +67,7 @@ def izlusci_igro(id):
     if najdba is not None:
         critics = int(najdba.group(1))
     else:
-        print("Napaka: kritiki", id)
+        #print("Napaka: kritiki", id)
         critics = "n/a"
 
 
@@ -88,40 +88,40 @@ def izlusci_igro(id):
         if najdba1 is not None:
             for najdba in podatki_re2.finditer(najdba1.group(1)):
                 zanri.append(najdba.group(1))
-        else:
-            print("Napaka: zanri", id)
+        #else:
+            #print("Napaka: zanri", id)
         
         perspektiva_re1 = re.compile(r'<dt>Perspective</dt>(.*?)</dd>', flags=re.DOTALL)
         najdba1 = perspektiva_re1.search(blok)
         if najdba1 is not None:
             for najdba in podatki_re2.finditer(najdba1.group(1)):
                 perspektiva.append(najdba.group(1))
-        else:
-            print("Napaka: perspektiva", id)
+        #else:
+            #print("Napaka: perspektiva", id)
         
         gameplay_re1 = re.compile(r'<dt>Gameplay</dt>(.*?)</dd>', flags=re.DOTALL)
         najdba1 = gameplay_re1.search(blok)
         if najdba1 is not None:
             for najdba in podatki_re2.finditer(najdba1.group(1)):
                 gameplay.append(najdba.group(1))                                # Beat 'em up je problem zaradi apostrofa.
-        else:
-            print("Napaka: gameplay", id)  
+        #else:
+            #print("Napaka: gameplay", id)  
         
         interface_re1 = re.compile(r'<dt>Interface</dt>(.*?)</dd>', flags=re.DOTALL)
         najdba1 = interface_re1.search(blok)
         if najdba1 is not None:
             for najdba in podatki_re2.finditer(najdba1.group(1)):
                 interface.append(najdba.group(1))
-        else:
-            print("Napaka: interface", id)         
+        #else:
+            #print("Napaka: interface", id)         
 
         setting_re1 = re.compile(r'<dt>Setting</dt>(.*?)</dd>', flags=re.DOTALL)
         najdba1 = setting_re1.search(blok)
         if najdba1 is not None:
             for najdba in podatki_re2.finditer(najdba1.group(1)):
                 setting.append(najdba.group(1))
-        else:
-            print("Napaka: setting", id) 
+        #else:
+            #print("Napaka: setting", id) 
 
 
 
@@ -131,7 +131,7 @@ def izlusci_igro(id):
     if najdba is not None:
         oznaka = najdba.group(1)
     else:
-        print("Napaka: oznaka", id)
+        #print("Napaka: oznaka", id)
         oznaka = "NG"
 
     
@@ -143,8 +143,8 @@ def izlusci_igro(id):
     if najdba1 is not None:
         for najdba in podatki_re2.finditer(najdba1.group(1)):  # Isti regex kot je uporabljen pri žanrih ipd.
             mediji.append(najdba.group(1))
-    else:
-        print("Napaka: mediji", id)
+    #else:
+        #print("Napaka: mediji", id)
     
     input = []
     input_re1 = re.compile(r'<dt>Input Devices Supported/Optional</dt>(.*?)</dd>', flags=re.DOTALL)
@@ -152,8 +152,8 @@ def izlusci_igro(id):
     if najdba1 is not None:
         for najdba in podatki_re2.finditer(najdba1.group(1)):
             input.append(najdba.group(1))
-    else:
-        print("Napaka: input", id)    
+    #else:
+        #print("Napaka: input", id)    
 
 
 
@@ -164,8 +164,8 @@ def izlusci_igro(id):
     if najdba1 is not None:
         for najdba in podatki_re2.finditer(najdba1.group(1)):
             multiplayer.append(najdba.group(1))
-    else:
-        print("Napaka: multiplayer", id)          
+    #else:
+        #print("Napaka: multiplayer", id)          
 
     offline_re = re.compile(r'<dt>Number of Offline Players</dt>.*?">(\d+-?\d*?) Player', flags=re.DOTALL)
     najdba1 = offline_re.search(vsebina)
@@ -173,7 +173,7 @@ def izlusci_igro(id):
         st_offline = najdba1.group(1)
     else:
         st_offline = "NG"
-        print("Napaka: st_offline", id)
+        #print("Napaka: st_offline", id)
 
     online_re = re.compile(r'<dt>Number of Online Players</dt>.*?">(\d+-?\d*?) Player', flags=re.DOTALL)
     najdba2 = online_re.search(vsebina)  
@@ -181,7 +181,7 @@ def izlusci_igro(id):
         st_online = najdba2.group(1)
     else:
         st_online = "NG"
-        print("Napaka: st_online", id)
+        #print("Napaka: st_online", id)
     
 
     # Izluscimo podatek o ceni.
