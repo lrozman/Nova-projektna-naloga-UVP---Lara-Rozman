@@ -180,6 +180,7 @@ def izlusci_igro(id):
     return {
         "datum izdaje": datum,
         "razvijalci": razvijalci,
+        "založniki": publishers,
         "Moby ocena": moby_score,
         "Ocena kritikov": critics,
         "žanri": zanri,
