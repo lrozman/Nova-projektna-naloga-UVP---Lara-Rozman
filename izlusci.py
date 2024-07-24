@@ -23,7 +23,13 @@ def izlusci_igro(id):
         yyyy = najdba.group(3)
         datum = yyyy + "/" + mm + "/" + dd
     else:
-        print("Napaka: datum", id)
+        datum_re = re.compile(r'<dt>Released</dt>.*?<a href="/game/\S+\s*.*?(\d+)\s*</a>', flags=re.DOTALL)
+        najdba = datum_re.search(vsebina)
+        if najdba is not None:
+            datum = najdba.group(1)
+        else:
+            print("Napaka: datum", id)
+            datum = "NG"
 
 
     # Izluscimo razvijalce in založnike.
