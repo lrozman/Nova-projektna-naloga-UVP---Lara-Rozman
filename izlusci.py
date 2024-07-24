@@ -26,7 +26,7 @@ def izlusci_igro(id):
         print("Napaka: datum", id)
 
 
-    # Izluscimo razvijalce.
+    # Izluscimo razvijalce in založnike.
     razvijalci = []
     devs_re1 = re.compile(r'<dt>Developers</dt>(.*?)<div class="info-score">', flags=re.DOTALL)
     najdba1 = devs_re1.search(vsebina)
@@ -36,6 +36,14 @@ def izlusci_igro(id):
             razvijalci.append((najdba["dev"], najdba["id"]))
     else:
         print("Napaka: razvijalci", id)
+    
+    publishers = []
+    pubs_re1 = re.compile(r'<dt>Publishers</dt>(.*?)</dd>', flags=re.DOTALL)
+    najdba1 = pubs_re1.search(vsebina)
+    if najdba1 is not None:
+        pubs_re2 = re.compile(r'<a href="https://www.mobygames.com/company/(?P<id>\d+)/.*?}\'>(?P<pub>.+?)</a>')
+        for najdba in pubs_re2.finditer(najdba1.group(1)):
+            publishers.append((najdba["pub"], najdba["id"]))
     
 
 
