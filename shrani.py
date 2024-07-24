@@ -1,7 +1,7 @@
 import csv
 
 def shrani(podatki):
-    with open("igre.csv", "w", encoding="utf-8") as dat:
+    with open("igre.csv", "w", encoding="utf-8", newline="") as dat:
         pisatelj = csv.writer(dat)
         pisatelj.writerow(
             [
@@ -56,7 +56,7 @@ def shrani(podatki):
 
     # Še ne vem, za kaj oziroma ali bom potrebovala spodnje csv-tabele.
 
-    with open("igre_zanri.csv", "w") as dat:
+    with open("igre_zanri.csv", "w", newline="") as dat:
         pisatelj = csv.writer(dat)
         pisatelj.writerow(["id", "zanr"])
         for podatek in podatki:
@@ -64,7 +64,7 @@ def shrani(podatki):
                 pisatelj.writerow([podatek["id"], zanr])
     
 
-    with open("igre_devs.csv", "w") as dat:
+    with open("igre_devs.csv", "w", newline="") as dat:
         pisatelj = csv.writer(dat)
         pisatelj.writerow(["id_razvijalca", "id_igre"])
         for podatek in podatki:
@@ -72,9 +72,9 @@ def shrani(podatki):
                 pisatelj.writerow([podatek["id"], dev[1]])
     
 
-    with open("igre_pubs.csv", "w") as dat:
+    with open("igre_pubs.csv", "w", newline="") as dat:
         pisatelj = csv.writer(dat)
-        pisatelj.writerow(["id_založnika", "id_igre"])
+        pisatelj.writerow(["id_zaloznika", "id_igre"])
         for podatek in podatki:
             for pub in podatek["založniki"]:
                 pisatelj.writerow([podatek["id"], pub[1]])
