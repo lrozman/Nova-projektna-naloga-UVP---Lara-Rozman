@@ -46,6 +46,7 @@ def izlusci_igro(id):
         moby_score = float(najdba.group(1))
     else:
         print("Napaka: moby score", id)
+        moby_score = "n/a"
 
     critics_re = re.compile(r'<dt>Critics</dt>.*?(\d\d)%', flags=re.DOTALL)
     najdba = critics_re.search(vsebina)
@@ -185,3 +186,7 @@ def izlusci_igro(id):
         "št. offline igralcev": st_offline,
         "št. online igralcev": st_online
     }
+
+
+def izlusci_razvijalca(id_dev):
+    return
