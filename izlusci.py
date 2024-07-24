@@ -108,6 +108,66 @@ def izlusci_igro(id):
             print("Napaka: setting", id) 
 
 
+
+    # Izluscimo podatek o oznaki.
+    oznaka_re = re.compile(r'Rating</dt>.*?">(.*?)</a>', flags=re.DOTALL)
+    najdba = oznaka_re.search(vsebina)
+    if najdba is not None:
+        oznaka = najdba.group(1)
+    else:
+        print("Napaka: oznaka", id)
+
+    
+    
+    # Izluscimo podatka o tipu medija in podprtih vhodnih napravah.
+    mediji = []
+    media_re1 = re.compile(r'<dt>Media Type</dt>(.*?)</dd>', flags=re.DOTALL)
+    najdba1 = media_re1.search(vsebina)
+    if najdba1 is not None:
+        for najdba in podatki_re2.finditer(najdba1.group(1)):  # Isti regex kot je uporabljen pri žanrih ipd.
+            mediji.append(najdba.group(1))
+    else:
+        print("Napaka: mediji", id)
+    
+    input = []
+    input_re1 = re.compile(r'<dt>Input Devices Supported/Optional</dt>(.*?)</dd>', flags=re.DOTALL)
+    najdba1 = input_re1.search(vsebina)
+    if najdba1 is not None:
+        for najdba in podatki_re2.finditer(najdba1.group(1)):
+            input.append(najdba.group(1))
+    else:
+        print("Napaka: input", id)    
+
+
+
+    # Izluscimo podatke o eno- in večigralskih načinih igre.
+    multiplayer = []
+    multiplayer_re = re.compile(r'<dt>Multiplayer Options</dt>(.*?)</dd>', flags=re.DOTALL)
+    najdba1 = multiplayer_re.search(vsebina)
+    if najdba1 is not None:
+        for najdba in podatki_re2.finditer(najdba1.group(1)):
+            multiplayer.append(najdba.group(1))
+    else:
+        print("Napaka: multiplayer", id)          
+
+    offline_re = re.compile(r'<dt>Number of Offline Players</dt>.*?">(\d+-?\d*?) Player', flags=re.DOTALL)
+    najdba1 = offline_re.search(vsebina)
+    if najdba1 is not None:
+        st_offline = najdba1.group(1)
+    else:
+        st_offline = "NG"
+        print("Napaka: st_offline", id)
+
+    online_re = re.compile(r'<dt>Number of Online Players</dt>.*?">(\d+-?\d*?) Player', flags=re.DOTALL)
+    najdba2 = online_re.search(vsebina)  
+    if najdba2 is not None:
+        st_online = najdba2.group(1)
+    else:
+        st_online = "NG"
+        print("Napaka: st_online", id)
+
+
+
     return {
         "datum izdaje": datum,
         "razvijalci": razvijalci,
@@ -118,4 +178,10 @@ def izlusci_igro(id):
         "gameplay": gameplay,
         "interface": interface,
         "setting": setting,
+        "oznaka": oznaka,
+        "tip medija": mediji,
+        "vhodne naprave": input,
+        "večigralski načini": multiplayer,
+        "št. offline igralcev": st_offline,
+        "št. online igralcev": st_online
     }
